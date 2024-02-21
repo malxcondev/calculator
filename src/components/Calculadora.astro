@@ -1,0 +1,54 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout>
+  <h2 class="text-center font-bold text-2xl mb-3">Calculadora</h2>
+  <div class="flex justify-center items-center flex-col gap-2">
+    <div class="">
+      <input class="bg-gray-900 rounded-md w-[300px] h-[70px] text-white font-bold pl-5" type="text" readonly id="pantalla" />
+    </div>
+    <div class="bg-gray-900 grid grid-cols-4 gap-3 text-white w-[300px] h-[400px] p-3 rounded-lg font-bold text-lg">
+      <button class="tecla hover:bg-gray-700 bg-gray-800 rounded-md">7</button>
+      <button class="tecla hover:bg-gray-700 bg-gray-800 rounded-md">8</button>
+      <button class="tecla hover:bg-gray-700 bg-gray-800 rounded-md">9</button>
+      <button class="tecla hover:bg-gray-700 bg-red-700 rounded-md">C</button>
+      <button class="tecla hover:bg-gray-700 bg-gray-800 rounded-md">4</button>
+      <button class="tecla hover:bg-gray-700 bg-gray-800 rounded-md">5</button>
+      <button class="tecla hover:bg-gray-700 bg-gray-800 rounded-md">6</button>
+      <button class="tecla hover:bg-gray-700 bg-gray-800 rounded-md">*</button>
+      <button class="tecla hover:bg-gray-700 bg-gray-800 rounded-md">1</button>
+      <button class="tecla hover:bg-gray-700 bg-gray-800 rounded-md">2</button>
+      <button class="tecla hover:bg-gray-700 bg-gray-800 rounded-md">3</button>
+      <button class="tecla hover:bg-gray-700 bg-gray-800 rounded-md">-</button>
+      <button class="tecla hover:bg-gray-700 bg-gray-800 rounded-md">.</button>
+      <button class="tecla hover:bg-gray-700 bg-gray-800 rounded-md">0</button>
+      <button class="tecla hover:bg-gray-700 bg-gray-800 rounded-md">/</button>
+      <button class="tecla hover:bg-gray-700 bg-blue-700 rounded-md">=</button>
+    </div>
+  </div>
+
+  <script>
+    const pantalla = document.getElementById('pantalla');
+    const teclas = document.querySelectorAll('.tecla');
+    let operacion = '';
+    let resultado = 0;
+
+    teclas.forEach(tecla => {
+      tecla.addEventListener('click', () => {
+        if (tecla.textContent === 'C') {
+          operacion = '';
+          resultado = 0;
+          pantalla.value = '';
+        } else if (tecla.textContent === '=') {
+          resultado = eval(operacion);
+          pantalla.value = resultado;
+          operacion = resultado;
+        } else {
+          operacion += tecla.textContent;
+          pantalla.value = operacion;
+        }
+      });
+    });
+  </script>
+</MainLayout>
